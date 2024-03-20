@@ -6,11 +6,11 @@
 </head>
 
 <body>
-  <script type='javascript' src=
-  "https://unpkg.com/htmx.org@1.9.11">
-</script><button hx-get='/screen' hx-target='desktop-tv' hx-swap=
-'innerHTML'>Update</button>
+  <script src="https://unpkg.com/htmx.org@1.9.11" type=
+  "text/javascript">
+</script>
 
-  <div id='destop-tv'></div>
+  <div hx-get="/screen" hx-trigger="every 1s" hx-target="this"
+  hx-swap="innerHTML"></div>
 </body>
 </html>
