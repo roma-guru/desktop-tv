@@ -3,14 +3,21 @@
 <html>
 <head>
   <title>Desktop TV</title>
-</head>
-
-<body>
   <script src="https://unpkg.com/htmx.org@1.9.11" type=
   "text/javascript">
 </script>
+  <style type="text/css">
+img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+  </style>
+</head>
 
-  <div hx-get="/screen" hx-trigger="every 1s" hx-target="this"
+<body>
+  <div hx-get="/screen" hx-trigger="every 3s" hx-target="this"
   hx-swap="innerHTML"></div>
 </body>
 </html>
