@@ -3,16 +3,14 @@
 Very simple Python desktop sharing solution.
 My usecase: sharing screen separately from audio/video (for which phone is good enough).
 
-## Installation
+## Dev Installation/Usage
+Requires Python 3.10
 
 ```bash
-brew install ngrok
-pip install ...
+git clone https://github.com/roma-guru/desktop-tv
+cd desktop-tv
+python -m venv venv
+. venv/bin/activate
+python main.py
 ```
     
-## Usage/Examples
-
-```bash
-python desktop-tv.py && ngrok http 8080
-```
-

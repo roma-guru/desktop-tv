@@ -1,9 +1,12 @@
 from io import BytesIO
 from base64 import b64encode
 
+from dotenv import load_dotenv
 from flask import Flask, render_template, send_file, request
 from mss import mss
+import ngrok
 
+load_dotenv()
 app = Flask(__name__)
 sct = mss()
 
@@ -25,4 +28,6 @@ def screen():
 
 
 if __name__ == "__main__":
+    listener = ngrok.forward("localhost:8080", authtoken_from_env=True)
+    print(f"Ingress established at: {listener.url()}")
     app.run(port=8080, debug=True)

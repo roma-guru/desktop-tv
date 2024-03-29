@@ -1,2 +1,4 @@
 Flask~=3.0
 mss~=9.0
+ngrok~=1.2
+python-dotenv~=1.0.1
