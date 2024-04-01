@@ -3,9 +3,11 @@
 <html>
 <head>
   <title>Desktop TV</title>
-  <script src="https://unpkg.com/htmx.org@1.9.11" type=
-  "text/javascript">
-</script>
+  <script type="text/javascript">
+  setTimeout(function(){
+        window.location.reload(1);
+      }, 3000);
+  </script>
   <style type="text/css">
 img {
         max-width: 100%;
@@ -17,9 +19,8 @@ img {
 </head>
 
 <body>
-  <div hx-get="/screen" hx-trigger="every 3s" hx-target="this"
-  hx-swap="innerHTML">
-    Screen sharing starts in 3..2..1..
+  <div>
+    <img src="/screen.png" alt="screen.png">
   </div>
 </body>
 </html>
