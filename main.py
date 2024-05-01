@@ -1,10 +1,10 @@
-from io import BytesIO
 from base64 import b64encode
+from io import BytesIO
 
-from dotenv import load_dotenv
-from flask import Flask, render_template, send_file, request
-from mss import mss
 import ngrok
+from dotenv import load_dotenv
+from flask import Flask, render_template, request, send_file
+from mss import mss
 
 load_dotenv()
 app = Flask(__name__)
@@ -16,7 +16,7 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/screen.png")
+@app.route("/screen")
 def screen():
     num = 0
     fname = next(sct.save(mon=num, output="/tmp/mon-{mon}.png"))
@@ -25,6 +25,6 @@ def screen():
 
 
 if __name__ == "__main__":
-    listener = ngrok.forward("localhost:8080", authtoken_from_env=True)
-    print(f"Ingress established at: {listener.url()}")
+    # listener = ngrok.forward("localhost:8080", authtoken_from_env=True)
+    # print(f"Ingress established at: {listener.url()}")
     app.run(port=8080, debug=True)
