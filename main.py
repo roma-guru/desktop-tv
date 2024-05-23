@@ -1,15 +1,17 @@
 from base64 import b64encode
 from io import BytesIO
+import time
 
-import ngrok
+# import ngrok
 import numpy as np
-from dotenv import load_dotenv
+
+# from dotenv import load_dotenv
 from flask import Flask, Response, render_template, request
 from mss import mss, tools
 
-#from jpeg import to_jpeg
+from jpeg import to_jpeg
 
-load_dotenv()
+# load_dotenv()
 app = Flask(__name__)
 
 
@@ -20,18 +22,27 @@ def home():
 
 @app.route("/screen")
 def screen():
+    mon_num = int(request.args.get("mon_num", 0))
+    fmt = request.args.get("fmt", "png")
+
     def frames():
         with mss() as sct:
-            mon = sct.monitors[0]
+            mon = sct.monitors[mon_num]
             while True:
                 shot = sct.grab(mon)
-                img_bytes = tools.to_png(shot.rgb, shot.size)
-                # img_bytes = to_jpeg(np.array(shot)[:, :, :3])
+                if fmt == "png":
+                    img_bytes = tools.to_png(shot.rgb, shot.size)
+                else:
+                    img_bytes = to_jpeg(shot.rgb, shot.size)
+
                 yield (
-                    b"--frame\r\nContent-Type: image/png\r\nContent-Size:%d\r\n\r\n%s\r\n"
+                    f"--frame\r\nContent-Type: image/{fmt}\r\n"
+                    "Content-Size:%d\r\n\r\n%s\r\n".encode()
                     % (len(img_bytes), img_bytes)
                 )
 
+    if fmt not in ["png", "jpeg", "jpg"]:
+        return "Invalid format", 400
     return Response(frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
