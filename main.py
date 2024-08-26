@@ -2,7 +2,6 @@ from base64 import b64encode
 from io import BytesIO
 import time
 
-# import ngrok
 import numpy as np
 
 # from dotenv import load_dotenv
@@ -22,8 +21,8 @@ def home():
 
 @app.route("/screen")
 def screen():
-    mon_num = int(request.args.get("mon_num", 0))
-    fmt = request.args.get("fmt", "png")
+    mon_num = int(request.args.get("mon", 1))
+    fmt = request.args.get("fmt", "jpeg")
 
     def frames():
         with mss() as sct:
